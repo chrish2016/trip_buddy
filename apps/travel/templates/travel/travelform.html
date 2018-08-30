@@ -1,0 +1,66 @@
+{% extends "travel/base.html" %}
+
+{% load static %}
+
+{% block title %}My amazing blog{% endblock %}
+
+{% block content %}
+    <header>
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-2">Travel Form</h1>
+                <!-- <p class="lead">These are your travels below:</p> -->
+            </div>
+        </div>
+    </header>
+    <div class="row">
+        <div class="container">
+            <div class="col-md-6">
+                {% if messages %}
+                <div class="alert alert-info" role="messages">
+                    {% for message in messages %}
+                    <p class="{{ message.tags }}">{{ message }}</p>
+                {% endfor %}
+                {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Add a trip:</h2>
+                <div class="container">
+                    <form action="/processtrip" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Destination:</label>
+                        <input type="text" class="form-control" name="destination" id="first_name" placeholder="Where are you going?">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Description:</label>
+                        <input type="text" class="form-control" name="description" id="first_name" placeholder="What is this trip for?">
+                    </div>
+                    <hr class="my-6">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Start:</label>
+                        <input type="date" class="form-control" name="trip_start" id="trip_start">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">End:</label>
+                        <input type="date" class="form-control" name="trip_end" id="trip_end">
+                    </div><br>
+                        <button type="submit" class="btn btn-info">Book Trip</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <h3></h3>
+                <p></p>
+            </div>
+            <div class="col-md-4">
+                
+            </div>
+        </div>
+    </div>
+{% endblock %}

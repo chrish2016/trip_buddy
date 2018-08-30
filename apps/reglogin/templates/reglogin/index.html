@@ -1,0 +1,81 @@
+{% extends "reglogin/base.html" %}
+{% load static %}
+
+{% block title %}My amazing blog{% endblock %}
+
+{% block content %}
+    <header>
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-4">Welcome to Trip Buddy</h1>
+                <p class="lead">Where we book your travels!</p>
+                <hr class="my-4">
+            </div>
+        </div>
+    </header>
+    <div class="row">
+        <div class="container">
+            <div class="col-md-6">
+                {% if messages %}
+                <div class="alert alert-info" role="messages">
+                    {% for message in messages %}
+                    <p class="{{ message.tags }}">{{ message }}</p>
+                {% endfor %}
+                {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Register here:</h2>
+                    <form action="/register" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">First Name:</label>
+                        <input type="text" class="form-control" name="first_name" id="first_name" placeholder="first name">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Last Name:</label>
+                        <input type="text" class="form-control" name="last_name" id="last_name" placeholder="last name">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address:</label>
+                        <input type="text" class="form-control form-control-sm." name="email" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password:</label>
+                            <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="password">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password Confirmation</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" name="confirm" placeholder="password confirmation">
+                    </div><br>
+                        <button type="submit" class="btn btn-info">Register</button>
+                    </form>
+            </div>
+            <div class="col-md-2">
+                <h3></h3>
+                <p></p>
+            </div>
+            <div class="col-md-4">
+                <h2>Log in here:</h2>
+                    <form action="/login" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address:</label>
+                        <input type="text" class="form-control form-control-sm." name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password:</label>
+                            <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="password">
+                    </div>
+                        <button type="submit" class="btn btn-info">Login</button>
+                    </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "travel/base.html" %}
+
+{% load static %}
+
+{% block title %}My amazing blog{% endblock %}
+
+{% block content %}
+    <header>
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-2">Trip: <i>{{trip.destination}}.</i></h1>
+                <!-- <p class="lead">These are your travels below:</p> -->
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <p><strong>Planned by:</strong> {{trip.travelers.first_name}}</p>
+                <p><strong>Description:</strong> {{trip.description}}</p>
+                <p><strong>Start:</strong> {{trip.trip_start}}</p>
+                <p><strong>End:</strong> {{trip.trip_end}}</p>
+            </div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3">
+                <h5>Other Users Joining</h5>
+                {% for trip in user.trips.all %}
+                {{trip.travelers.first_name}} {{trip.travelers.last_name}}<br>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="row">
+            <form action="/travels">
+                <button type="submit" class="btn btn-info">Dashboard</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

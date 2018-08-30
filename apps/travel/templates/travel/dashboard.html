@@ -1,0 +1,87 @@
+{% extends "travel/base.html" %}
+
+{% load static %}
+
+{% block title %}My amazing blog{% endblock %}
+
+{% block content %}
+    <header>
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-2">Welcome, {{user.first_name}}.</h1>
+                <hr class="my-6">
+                <!-- <p class="lead">These are your travels below:</p> -->
+                <form action="/addtrip" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-info btn-lg">Book a trip!</button>
+                </form>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <div class="container">
+                    <h3>Your trips:</h3>
+                    <table class="table table-hover table-light">
+                        <thead>
+                            <tr>
+                                <th scope="col">Description</th>
+                                <th scope="col">Start</th>
+                                <th scope="col">End</th>
+                                <th scope="col">Plan</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>{% for trip in user.trips.all %}
+                                <td><a href="/travels/{{trip.id}}">{{trip.destination}}</a></td>
+                                <td>{{trip.trip_start}}</td>
+                                <td>{{trip.trip_end}}</td>
+                                <td>{{trip.description}}</td>
+                                <td>
+                                    <a href="/deletetrip/{{ trip.id }}">cancel</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            <div class="col-md-1"></div>
+        </div>
+        <hr class="my-6">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="container">
+                    <h5>Other Users travel plans:</h5>
+                    <table class="table table-hover table-light">
+                        <thead>
+                            <tr>
+                                <th scope="col">Description</th>
+                                <th scope="col">Start</th>
+                                <th scope="col">End</th>
+                                <th scope="col">Do you want to join?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>{% for trip in trips %}
+                                <td><a href="/travels/{{trip.id}}">{{trip.destination}}</a></td>
+                                <td>{{trip.trip_start}}</td>
+                                <td>{{trip.trip_end}}</td>
+                                <td>
+                                    <a href="/travels/{{ trip.id }}/jointrip">Join</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+{% endblock %}
