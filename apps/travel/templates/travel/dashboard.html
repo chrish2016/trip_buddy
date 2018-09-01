@@ -35,16 +35,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>{% for trip in user.trips.all %}
+                            <tr>{% for trip in trips %}
                                 <td><a href="/travels/{{trip.id}}">{{trip.destination}}</a></td>
                                 <td>{{trip.trip_start}}</td>
                                 <td>{{trip.trip_end}}</td>
                                 <td>{{trip.description}}</td>
                                 <td>
-                                    <a href="/deletetrip/{{ trip.id }}">cancel</a>
+                                    <a href="/canceltrip/{{ trip.id }}">cancel</a>
+                                    <a href="/deletetrip/{{ trip.id }}">delete</a>
                                 </td>
-                            </tr>
-                            {% endfor %}
+                            </tr>{% endfor %}
+                            <tr>{% for trip in joined_trips %}
+                                <td><a href="/travels/{{trip.id}}">{{trip.destination}}</a></td>
+                                <td>{{trip.trip_start}}</td>
+                                <td>{{trip.trip_end}}</td>
+                                <td>{{trip.description}}</td>
+                                <td>
+                                    <a href="/canceltrip/{{ trip.id }}">cancel</a>
+                                </td>
+                            </tr>{% endfor %}
+                          
                         </tbody>
                     </table>
                     </div>
@@ -63,14 +73,16 @@
                                 <th scope="col">Description</th>
                                 <th scope="col">Start</th>
                                 <th scope="col">End</th>
+                                <th scope="col">Planner</th>
                                 <th scope="col">Do you want to join?</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>{% for trip in trips %}
+                            <tr>{% for trip in other_trips %}
                                 <td><a href="/travels/{{trip.id}}">{{trip.destination}}</a></td>
                                 <td>{{trip.trip_start}}</td>
                                 <td>{{trip.trip_end}}</td>
+                                <td>{{trip.planner.first_name}}</td>
                                 <td>
                                     <a href="/travels/{{ trip.id }}/jointrip">Join</a>
                                 </td>

@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^deletetrip/(?P<trip_id>\d+)$', views.deletetrip),
     url(r'^travels/(?P<trip_id>\d+)$', views.showtrip),
     url(r'^travels/(?P<trip_id>\d+)/jointrip$', views.jointrip),
+    url(r'^canceltrip/(?P<trip_id>\d+)$', views.canceltrip),
 ]
