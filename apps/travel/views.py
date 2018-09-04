@@ -42,15 +42,28 @@ def processtrip(request):
     return redirect('/travels')
 
 def showtrip(request, trip_id):
-    a = Trip.objects.get(id=trip_id)
-    a.travelers.all()
-    
+    # this_trip = Trip.objects.get(id=trip_id)
+    # this_traveler = Trip.objects.get(travelers=trip_id)
+    # this_traveler.trips.all()
+
     context = {
         'trip': Trip.objects.get(id=trip_id),
-        'a': Trip.objects.get(id=trip_id),
-        'travelers': a.travelers.all()
+        'trips': Trip.objects.all(),
+        'this_trip': Trip.objects.get(id=trip_id),
+        'travelers': Trip.objects.values('travelers').filter(id=trip_id)
     }
     return render(request, 'travel/trip.html', context)
+
+# def showtrip(request, trip_id):
+#     a = Trip.objects.get(id=trip_id)
+#     a.travelers.all()
+    
+#     context = {
+#         'trip': Trip.objects.get(id=trip_id),
+#         'a': Trip.objects.get(id=trip_id),
+#         'travelers': a.travelers.all()
+#     }
+#     return render(request, 'travel/trip.html', context)
 
 def deletetrip(request, trip_id):
     trip = Trip.objects.get(id=trip_id).delete()
